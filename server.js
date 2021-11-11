@@ -1,15 +1,13 @@
-require("dotenv").config();
-const express = require("express");
-const path = require("path");
+require('dotenv').config()
+const express = require('express')
+const path = require('path')
 
-const port = process.env.PORT || 8000;
-const app = express();
-const staticDir = process.env.DEV ? "./client/public" : "./client/build";
+const port = process.env.PORT || 8000
+const app = express()
+const staticDir = process.env.DEV ? './client/public' : './client/build' //added .env file with DEV=true
 
-app.use(express.static(staticDir));
-
-
+app.use(express.static(staticDir))
 
 app.listen(port, () => {
-  console.log('listening on port: ' + port) 
+  console.log('listening on port: ' + port)
 })
