@@ -1,18 +1,24 @@
 //----Necessary imports
-import { BrowserRouter, Route, Routes } from 'react-router-dom' //sets up React Router
-import './App.css'
-import Chat1 from 'components/Chat1.js'
-import Chat2 from 'components/Chat2.js'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Chat1 from './components/Chat1.js'
+import Chat2 from './components/Chat2.js'
+import Chat3 from './components/Chat3.js'
+import Home from './components/Home.js'
 
-//App function to render page structural elements and BrowserRouter/Routes
+//This makes the paths needed for our chat rooms
 function App () {
   return (
+    //React fragment (instead of <div>)
     <>
-      <h1>React Chat App</h1>
-      <h2>Click a button to join a chat room!</h2>
-
-      {/* button navigation to rooms goes here */}
-      {/* image for main page goes here */}
+      <BrowserRouter>
+        <Routes>
+          {/* Path shows the path for the page and element refers to the component */}
+          <Route path='/' element={<Home />} />
+          <Route path='/chat1' element={<Chat1 />} />
+          <Route path='/chat2' element={<Chat2 />} />
+          <Route path='/chat3' element={<Chat3 />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
