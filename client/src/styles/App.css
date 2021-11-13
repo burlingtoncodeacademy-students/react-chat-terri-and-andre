@@ -145,7 +145,7 @@ ul#nav li a:hover {
   flex-direction: row;
   justify-content: center;
   max-width: 400px;
-  max-height: 300px;
+  max-height: 250px;
   flex-grow: 3;
   background: white;
   padding: 5px;

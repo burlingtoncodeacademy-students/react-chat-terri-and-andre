@@ -40,9 +40,24 @@ export default function Chat1 () {
           </div>
         </div>
         <div id='input-field-wrap'>
+          <h3>Type your Name and send:</h3>
+
+          {/* Input from user to go to the database */}
+          <div id='input-text'>Name input goes here</div>
+          <ul id='send'>
+            <li>
+              {/* Sends input text to db */}
+              <Link to='/chat1'>Send</Link>
+            </li>
+          </ul>
+        </div>
+        <div id='input-field-wrap'>
+          <h3>Type your Message and send:</h3>
+          {/* Input from user to go to the database */}
           <div id='input-text'>text input goes here</div>
           <ul id='send'>
             <li>
+              {/* Sends input text to db */}
               <Link to='/chat1'>Send</Link>
             </li>
           </ul>
