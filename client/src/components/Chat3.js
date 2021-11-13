@@ -3,10 +3,10 @@ import React from 'react'
 import { useState, useEffect } from 'react' //import hooks from React
 import { Link } from 'react-router-dom'
 import '../styles/App.css'
-import Chat2Nav from './Chat2Nav.js'
+import ButtonNav from './Chat3Nav.js'
 
 //-----First chat room component
-export default function Chat2 () {
+export default function Chat3 () {
   //Return renders the appearance of the page
   //uses state to hold the result of the fetch
   // const [allMessages, setAllMessages] = useState([])
@@ -32,7 +32,7 @@ export default function Chat2 () {
         {/* Button navigation div */}
         <div id='button-nav'>
           {/* Importing ButtonNav component */}
-          <Chat2Nav />
+          <ButtonNav />
         </div>
         <div id='img-chat-wrap'>
           <div id='chat-window'>
