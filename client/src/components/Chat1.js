@@ -6,10 +6,27 @@ import Chat1Nav from './Chat1Nav.js'
 
 //-----First chat room component
 export default function Chat1 () {
-  //Return renders the appearance of the page
+  //Page refreshes every 10 seconds
+
+  //state to handle set interval
+  const [pageUpdate, setPageUpdate] = useState(0)
+  function chatRefresher (num) {
+    let intervalId = setInterval(tick, 1000)
+
+    function tick () {
+      console.log(num)
+      num = num - 1
+      if (num <= 0) {
+        //update state of setPageUpdate so it triggers useEffect to run again
+        window.location.reload()
+        clearInterval(intervalId)
+      }
+    }
+  }
+  chatRefresher(10)
   //uses state to hold the result of the fetch
   const [allMessages, setAllMessages] = useState([])
-  console.log(allMessages)
+
   useEffect(() => {
     //fetch information from MongoDb database endpoint
     fetch('/allmessages')
@@ -20,8 +37,8 @@ export default function Chat1 () {
       .then(json => {
         setAllMessages(json)
       })
-  }, [])
-  console.log(allMessages)
+  }, [pageUpdate])
+  //Return renders the appearance of the page
   return (
     <div class='wrapper'>
       {/* Page title div */}
@@ -38,7 +55,7 @@ export default function Chat1 () {
         <div id='img-chat-wrap'>
           <div id='chat-window'>
             <div id='chat-messages'>
-              chat messages go here
+              <h3>Here's the scoop:</h3>
               {/* renders the messages to the chat window */}
               {allMessages.map(msg => {
                 return (
