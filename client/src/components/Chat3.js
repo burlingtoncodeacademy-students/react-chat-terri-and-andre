@@ -1,26 +1,44 @@
 //necessary imports
 import React from 'react'
 import { useState, useEffect } from 'react' //import hooks from React
-import { Link } from 'react-router-dom'
 import '../styles/App.css'
-import ButtonNav from './Chat3Nav.js'
+import Chat3Nav from './Chat3Nav.js'
 
 //-----First chat room component
 export default function Chat3 () {
-  //Return renders the appearance of the page
-  //uses state to hold the result of the fetch
-  // const [allMessages, setAllMessages] = useState([])
+  //Page refreshes every 10 seconds
 
-  // useEffect(() => {
-  //   //fetch information from MongoDb database endpoint
-  //   fetch('http://localhost:5000/allmessages')
-  //     .then(res => {
-  //       return res.json()
-  //     })
-  //     .then(json => {
-  //       setAllMessages(json)
-  //     })
-  // }, [])
+  //state to handle set interval
+  const [pageUpdate, setPageUpdate] = useState(0)
+  function chatRefresher (num) {
+    let intervalId = setInterval(tick, 1000)
+
+    function tick () {
+      console.log(num)
+      num = num - 1
+      if (num <= 0) {
+        //update state of setPageUpdate so it triggers useEffect to run again
+        window.location.reload()
+        clearInterval(intervalId)
+      }
+    }
+  }
+  chatRefresher(10)
+  //uses state to hold the result of the fetch
+  const [allMessages, setAllMessages] = useState([])
+
+  useEffect(() => {
+    //fetch information from MongoDb database endpoint
+    fetch('/allmessages')
+      .then(res => {
+        return res.json()
+      })
+      // returned data is put into setAllMessages callback
+      .then(json => {
+        setAllMessages(json)
+      })
+  }, [pageUpdate])
+  //Return renders the appearance of the page
   return (
     <div class='wrapper'>
       {/* Page title div */}
@@ -32,24 +50,52 @@ export default function Chat3 () {
         {/* Button navigation div */}
         <div id='button-nav'>
           {/* Importing ButtonNav component */}
-          <ButtonNav />
+          <Chat3Nav />
         </div>
         <div id='img-chat-wrap'>
           <div id='chat-window'>
-            <div>chat messages go here</div>
+            <div id='chat-messages'>
+              <h4>Here's the scoop:</h4>
+              {/* renders the messages to the chat window */}
+              {allMessages.map(msg => {
+                return (
+                  <div key={msg._id}>
+                    <div>
+                      {msg.name} says: {msg.message}
+                    </div>
+                    <div>posted at: {Date.now()}</div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </div>
         <div id='input-field-wrap'>
-          <div id='input-text'>text input goes here</div>
-          <ul id='send'>
-            <li>
-              <Link to='/chat1'>Send</Link>
-            </li>
-          </ul>
+          <div id='input-text'>
+            {/* Enter name and message */}
+            <form action='/chat' method='POST'>
+              <div id='user-name'>
+                <input
+                  type='text'
+                  name='name'
+                  placeholder='Enter your user name'
+                />
+              </div>
+              <div id='user-message'>
+                <input
+                  type='text'
+                  name='message'
+                  placeholder='Enter your message'
+                />
+                <input type='submit' />
+              </div>
+            </form>
+            <div></div>
+            <footer class='page-footer'>
+              Andre and Terri's Super Cool Chat App &copy;
+            </footer>
+          </div>
         </div>
-        <footer class='page-footer'>
-          Andre and Terri's Super Cool Chat App &copy;
-        </footer>
       </div>
     </div>
   )

@@ -55,13 +55,13 @@ export default function Chat1 () {
         <div id='img-chat-wrap'>
           <div id='chat-window'>
             <div id='chat-messages'>
-              <h3>Here's the scoop:</h3>
+              <h4>Here's the scoop:</h4>
               {/* renders the messages to the chat window */}
               {allMessages.map(msg => {
                 return (
                   <div key={msg._id}>
                     <div>
-                      {msg.name} says:{msg.message}
+                      {msg.name} says: {msg.message}
                     </div>
                     <div>posted: {Date.now()}</div>
                   </div>

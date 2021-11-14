@@ -9,7 +9,7 @@ export default function Chat3Nav (props) {
       {/* List item links to individual chat rooms--will style these as buttons */}
       <div id='nav-wrapper'>
         <ul id='nav'>
-          <div id='room-title'>
+          <div id='room-title-3'>
             <h2>Welcome to Chat Room 3!</h2>
           </div>
           <li>
