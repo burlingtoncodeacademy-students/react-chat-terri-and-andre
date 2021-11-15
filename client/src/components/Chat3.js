@@ -73,7 +73,7 @@ export default function Chat3 () {
         <div id='input-field-wrap'>
           <div id='input-text'>
             {/* Enter name and message */}
-            <form action='/chat' method='POST'>
+            <form action='/chat/chat3' method='POST'>
               <div id='user-name'>
                 <input
                   type='text'

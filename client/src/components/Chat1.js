@@ -12,13 +12,13 @@ export default function Chat1 () {
   const [pageUpdate, setPageUpdate] = useState(0)
   function chatRefresher (num) {
     let intervalId = setInterval(tick, 1000)
-
+    //function that counts down from whatever you enter into the chatRefresher() and then page refreshes
     function tick () {
       console.log(num)
       num = num - 1
       if (num <= 0) {
         //update state of setPageUpdate so it triggers useEffect to run again
-        window.location.reload()
+        window.location.reload() //reloads window once if statement is true--once count reaches
         clearInterval(intervalId)
       }
     }
