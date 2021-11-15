@@ -1,8 +1,9 @@
 //imports
 const mongoose = require('mongoose')
 
-//schema
+//schema used for chat 2
 const Message2 = new mongoose.Schema({
+  //setting the types and requirement or default for each message category
   name: { type: String, required: true },
   message: { type: String, required: true },
   date: { type: Date, default: Date.now() }

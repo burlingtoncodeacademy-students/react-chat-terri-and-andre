@@ -6,25 +6,26 @@ import Chat2Nav from './Chat2Nav.js'
 
 //-----First chat room component
 export default function Chat2 () {
-  //Page refreshes every 10 seconds
-
   //state to handle set interval
-  const [pageUpdate, setPageUpdate] = useState(0)
+  const [pageUpdate, setPageUpdate] = useState(0) //starts at zero
+  //chat refresher function for refreshing page
   function chatRefresher (num) {
+    //create variable that sets the interval to do what function specifies every 10 seconds
     let intervalId = setInterval(tick, 1000)
-
+    //tick function acts when the countdown above finishes
     function tick () {
-      console.log(num)
+      //num declared and conditional to trigger action when countdown hits zero
       num = num - 1
       if (num <= 0) {
-        //update state of setPageUpdate so it triggers useEffect to run again
+        //function to load the page and then interval is cleared
         window.location.reload()
         clearInterval(intervalId)
       }
     }
   }
-  chatRefresher(10)
-  //uses state to hold the result of the fetch
+  chatRefresher(10) //page refresher starts countdown from 10
+
+  //use state to hold the result of the fetch
   const [chat2Messages, setChat2Messages] = useState([])
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function Chat2 () {
           <div id='chat-window'>
             <div id='chat-messages'>
               <h4>Here's the scoop:</h4>
-              {/* renders the messages to the chat window */}
+              {/* renders the messages to the chat window by mapping over the array and returning the each message value when called by msg. followed by relevant array key*/}
               {chat2Messages.map(msg => {
                 return (
                   <div key={msg._id}>
