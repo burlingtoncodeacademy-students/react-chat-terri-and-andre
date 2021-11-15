@@ -63,7 +63,7 @@ export default function Chat1 () {
                     <div>
                       {msg.name} says: {msg.message}
                     </div>
-                    <div>posted: {Date.now()}</div>
+                    <div>posted: {msg.date}</div>
                   </div>
                 )
               })}

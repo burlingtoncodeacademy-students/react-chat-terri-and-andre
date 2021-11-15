@@ -33,7 +33,7 @@ export default function Chat2 () {
       .then(res => {
         return res.json()
       })
-      // returned data is put into setAllMessages callback
+      // returned data is put into setChat2Messages callback
       .then(json => {
         setChat2Messages(json)
       })
@@ -61,9 +61,9 @@ export default function Chat2 () {
                 return (
                   <div key={msg._id}>
                     <div>
-                      {msg.name} says: {msg.message}
+                      {msg.name} says:{msg.message}
                     </div>
-                    <div>posted: {Date.now()}</div>
+                    <div>posted: {msg.date}</div>
                   </div>
                 )
               })}
@@ -73,7 +73,7 @@ export default function Chat2 () {
         <div id='input-field-wrap'>
           <div id='input-text'>
             {/* Enter name and message */}
-            <form action='/chat2' method='POST'>
+            <form action='/chat/chat2' method='POST'>
               <div id='user-name'>
                 <input
                   type='text'

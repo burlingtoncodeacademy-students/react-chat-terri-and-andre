@@ -15,6 +15,12 @@ const mongoose = require('mongoose')
 //imports Messages schema from Messages.js
 const Message = require('./Message')
 
+//imports Messages schema from Messages2.js
+const Message2 = require('./Message2')
+
+//imports Messages schema from Messages3.js
+const Message3 = require('./Message3')
+
 // specifies a port
 const port = process.env.PORT || 5000
 
@@ -44,14 +50,13 @@ app.use(express.urlencoded({ extended: true }))
 //creating model for message post
 const ChatMsg = mongoose.model('messages', Message)
 
-//send all results as a json to the page
+//send all results as a json to the page for main chat (Chat room 1)
 app.get('/allmessages', async (req, res) => {
   let allMessages = await ChatMsg.find({})
-  console.log(allMessages)
   res.json(allMessages)
 })
 
-//function to putting a new message into the collection
+//route for /chat to put new message into the collection
 app.post('/chat', async (req, res) => {
   //assigning the new message to a variable
   const newMessage = new ChatMsg({
@@ -61,6 +66,46 @@ app.post('/chat', async (req, res) => {
 
   //saves new message entry
   await newMessage.save()
+})
+
+//creating model for messages from room2 post
+const ChatMsg2 = mongoose.model('message2s', Message2)
+//send all results as a json to the page for room 2
+app.get('/chat2messages', async (req, res) => {
+  let chat2Messages = await ChatMsg2.find({})
+  res.json(chat2Messages)
+})
+
+//route for /chat/chat2 chat room 2 to put new message into the collection
+app.post('/chat/chat2', async (req, res) => {
+  //assigning the new message to a variable
+  const newMessage2 = new ChatMsg2({
+    name: req.body.name,
+    message: req.body.message
+  })
+
+  //saves new message entry
+  await newMessage2.save()
+})
+
+//creating model for messages from room3 post
+const ChatMsg3 = mongoose.model('message3s', Message3)
+//send all results as a json to the page for room 2
+app.get('/chat3messages', async (req, res) => {
+  let chat3Messages = await ChatMsg3.find({})
+  res.json(chat3Messages)
+})
+
+//route for /chat/chat2 chat room 2 to put new message into the collection
+app.post('/chat/chat3', async (req, res) => {
+  //assigning the new message to a variable
+  const newMessage3 = new ChatMsg3({
+    name: req.body.name,
+    message: req.body.message
+  })
+
+  //saves new message entry
+  await newMessage3.save()
 })
 
 app.listen(port, () => {

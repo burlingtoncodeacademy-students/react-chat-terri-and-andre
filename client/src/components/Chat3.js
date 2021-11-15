@@ -25,17 +25,17 @@ export default function Chat3 () {
   }
   chatRefresher(10)
   //uses state to hold the result of the fetch
-  const [allMessages, setAllMessages] = useState([])
+  const [chat3Messages, setChat3Messages] = useState([])
 
   useEffect(() => {
     //fetch information from MongoDb database endpoint
-    fetch('/allmessages')
+    fetch('/chat3messages')
       .then(res => {
         return res.json()
       })
-      // returned data is put into setAllMessages callback
+      // returned data is put into setChat3Messages callback
       .then(json => {
-        setAllMessages(json)
+        setChat3Messages(json)
       })
   }, [pageUpdate])
   //Return renders the appearance of the page
@@ -57,13 +57,13 @@ export default function Chat3 () {
             <div id='chat-messages'>
               <h4>Here's the scoop:</h4>
               {/* renders the messages to the chat window */}
-              {allMessages.map(msg => {
+              {chat3Messages.map(msg => {
                 return (
                   <div key={msg._id}>
                     <div>
-                      {msg.name} says: {msg.message}
+                      {msg.name} says:{msg.message}
                     </div>
-                    <div>posted at: {Date.now()}</div>
+                    <div>posted: {msg.date}</div>
                   </div>
                 )
               })}
